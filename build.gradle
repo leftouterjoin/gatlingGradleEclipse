@@ -1,0 +1,26 @@
+repositories.mavenCentral()
+apply plugin: 'eclipse'
+apply plugin: 'scala'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: 'latest.release'
+    compile group: 'junit', name: 'junit', version:'latest.release'
+}
+
+tasks.withType(ScalaCompile) {
+  scalaCompileOptions.useAnt = false
+}
+
+// ./gradlew runSimulation -Psimulation="computerdatabase.BasicSimulation"
+// ./gradlew runSimulation -Psimulation="computerdatabase.advanced.AdvancedSimulationStep01"
+task runSimulation(type: JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	systemProperties = ["gatling.http.enableGA": "false"]
+	main = 'io.gatling.app.Gatling'
+	args = ["--simulation", project.hasProperty("simulation")? project.property("simulation"): ""]
+}
+
