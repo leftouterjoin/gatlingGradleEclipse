@@ -1,18 +1,17 @@
-repositories.mavenCentral()
 apply plugin: 'eclipse'
 apply plugin: 'scala'
 
 repositories {
-	mavenCentral()
+	jcenter()
 }
 
 dependencies {
-    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: 'latest.release'
-    compile group: 'junit', name: 'junit', version:'latest.release'
+	compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: 'latest.release'
+	compile group: 'junit', name: 'junit', version:'latest.release'
 }
 
 tasks.withType(ScalaCompile) {
-  scalaCompileOptions.useAnt = false
+	scalaCompileOptions.useAnt = false
 }
 
 // ./gradlew runSimulation -Psimulation="computerdatabase.BasicSimulation"
